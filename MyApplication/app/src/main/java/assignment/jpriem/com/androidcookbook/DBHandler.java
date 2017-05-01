@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_RECIPES + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_DESCRIPTION + " TEXT,"+ KEY_COOK_TIME + " TEXT," + KEY_INGREDIENTS + " nvarchar(max)," + KEY_INSTRUCTIONS + " nvarchar(max)";
+                + KEY_DESCRIPTION + " TEXT,"+ KEY_COOK_TIME + " TEXT," + KEY_INGREDIENTS + " nvarchar(max)," + KEY_INSTRUCTIONS + " TEXT";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
     @Override
@@ -55,7 +57,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_DESCRIPTION, recipe.getDescription());
         values.put(KEY_COOK_TIME, recipe.getCookTime());
         //To add the arrayLists for ingredients and instructions need to become json objects
-
+        values.put(KEY_INSTRUCTIONS, recipe.getCookInstructions());
+        values.put(KEY_INGREDIENTS, new Gson().toJson(recipe.getIngredients()));
 // Inserting Row
         db.insert(TABLE_RECIPES, null, values);
         db.close(); // Closing database connection

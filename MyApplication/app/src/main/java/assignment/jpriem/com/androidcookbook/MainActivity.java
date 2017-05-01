@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         Recipe pie = new Recipe("Pie", "A apple pie", 45);
         ArrayList<Pair<Integer, String>> instructions = new ArrayList<Pair<Integer, String>>();
         ArrayList<Pair<Double,String>> ingredients = new ArrayList<Pair<Double, String>>();
-        pie.AddInstruction(new Pair<Integer, String>(1, "Pre-heat the oven to 400 degrees"));
+        //pie.AddInstruction(new Pair<Integer, String>(1, "Pre-heat the oven to 400 degrees"));
         pie.AddIngredient(1.0, "Pie crust");
         pie.RemoveIngredient("Pie crust");
-        pie.RemoveInstruction(1);
+        //pie.RemoveInstruction(1);
     }
 
 

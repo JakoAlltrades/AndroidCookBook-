@@ -12,8 +12,8 @@ public class CreateARecipe extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Get the view from new_activity.xml
         setContentView(R.layout.create_a_recipe);
+
     }
 
 }

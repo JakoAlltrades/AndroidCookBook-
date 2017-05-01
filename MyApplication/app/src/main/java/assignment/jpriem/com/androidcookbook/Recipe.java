@@ -3,9 +3,6 @@ package assignment.jpriem.com.androidcookbook;
 import android.util.Pair;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by jprirm on 4/30/2017.
@@ -17,7 +14,7 @@ public class Recipe {
     private ArrayList<Pair<Double, String>> ingredients;//amount and name of ingredient
     private String description;
     private int cookTime;
-    private ArrayList<Pair<Integer, String>> cookInstructions;//Step number and then instructions
+    private String cookInstructions;
 
     public Recipe(String name, String description, int cookTime)
     {
@@ -25,10 +22,9 @@ public class Recipe {
         this.description = description;
         this.cookTime = cookTime;
         ingredients = new ArrayList<Pair<Double,String>>();
-        cookInstructions = new ArrayList<Pair<Integer, String>>();
     }
 
-    public Recipe(String name, String description, int cookTime, ArrayList<Pair<Double,String>> ingredients, ArrayList<Pair<Integer, String>> cookInstructions)
+    public Recipe(String name, String description, int cookTime, ArrayList<Pair<Double,String>> ingredients,String cookInstructions)
     {
         this.name = name;
         this.description = description;
@@ -57,20 +53,9 @@ public class Recipe {
         }
     }
 
-    public void AddInstruction(Pair<Integer,String> instruction)
+    public void setInstruction(String instruction)
     {
-        cookInstructions.add(instruction);
-    }
-
-    public void RemoveInstruction(int step)
-    {
-       for(int j = 0; j < cookInstructions.size(); j++)
-       {
-           if(cookInstructions.get(j).first == step)
-           {
-               cookInstructions.remove(j);
-           }
-       }
+        this.cookInstructions = instruction;
     }
 
     public void setId(int value)
@@ -104,7 +89,7 @@ public class Recipe {
         return ingredients;
     }
 
-    public ArrayList<Pair<Integer, String>> getCookInstructions() {
+    public String getCookInstructions() {
         return cookInstructions;
     }
 }

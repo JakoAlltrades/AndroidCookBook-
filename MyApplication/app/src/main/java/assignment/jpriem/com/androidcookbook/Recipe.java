@@ -12,17 +12,12 @@ import java.util.Map;
  */
 
 public class Recipe {
+    private int id;
     private String name;
     private ArrayList<Pair<Double, String>> ingredients;//amount and name of ingredient
     private String description;
     private int cookTime;
-    private Map<Integer, String> cookInstructions;
-
-    public Recipe()
-    {
-        ingredients = new ArrayList<Pair<Double,String>>();
-        cookInstructions = new HashMap<Integer, String>();
-    }
+    private ArrayList<Pair<Integer, String>> cookInstructions;//Step number and then instructions
 
     public Recipe(String name, String description, int cookTime)
     {
@@ -30,10 +25,10 @@ public class Recipe {
         this.description = description;
         this.cookTime = cookTime;
         ingredients = new ArrayList<Pair<Double,String>>();
-        cookInstructions = new HashMap<Integer, String>();
+        cookInstructions = new ArrayList<Pair<Integer, String>>();
     }
 
-    public Recipe(String name, String description, int cookTime, ArrayList<Pair<Double,String>> ingredients, HashMap<Integer,String> cookInstructions)
+    public Recipe(String name, String description, int cookTime, ArrayList<Pair<Double,String>> ingredients, ArrayList<Pair<Integer, String>> cookInstructions)
     {
         this.name = name;
         this.description = description;
@@ -64,15 +59,52 @@ public class Recipe {
 
     public void AddInstruction(Pair<Integer,String> instruction)
     {
-        cookInstructions.put(instruction.first, instruction.second);
+        cookInstructions.add(instruction);
     }
 
     public void RemoveInstruction(int step)
     {
-        if(cookInstructions.containsKey(step))
-        {
-            cookInstructions.remove(step);
-        }
+       for(int j = 0; j < cookInstructions.size(); j++)
+       {
+           if(cookInstructions.get(j).first == step)
+           {
+               cookInstructions.remove(j);
+           }
+       }
     }
 
+    public void setId(int value)
+    {
+        id = value;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public int getCookTime()
+    {
+        return cookTime;
+    }
+
+    public ArrayList<Pair<Double,String>> getIngredients()
+    {
+        return ingredients;
+    }
+
+    public ArrayList<Pair<Integer, String>> getCookInstructions() {
+        return cookInstructions;
+    }
 }

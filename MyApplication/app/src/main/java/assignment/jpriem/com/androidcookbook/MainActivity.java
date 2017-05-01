@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Recipe pie = new Recipe("Pie", "A apple pie", 45);
-        HashMap<Integer, String> instructions = new HashMap<Integer, String>();
+        ArrayList<Pair<Integer, String>> instructions = new ArrayList<Pair<Integer, String>>();
         ArrayList<Pair<Double,String>> ingredients = new ArrayList<Pair<Double, String>>();
         pie.AddInstruction(new Pair<Integer, String>(1, "Pre-heat the oven to 400 degrees"));
         pie.AddIngredient(1.0, "Pie crust");

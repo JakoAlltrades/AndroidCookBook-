@@ -13,6 +13,7 @@ public class CreateARecipe extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_a_recipe);
+
     }
 
 }

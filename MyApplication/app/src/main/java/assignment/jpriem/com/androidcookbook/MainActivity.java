@@ -1,11 +1,12 @@
 package assignment.jpriem.com.androidcookbook;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
+import android.view.View;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,5 +22,20 @@ public class MainActivity extends AppCompatActivity {
         pie.AddIngredient(1.0, "Pie crust");
         pie.RemoveIngredient("Pie crust");
         pie.RemoveInstruction(1);
+    }
+
+
+
+    public void CreateRecipe(View view)
+    {
+        Intent myIntent = new Intent(MainActivity.this, CreateARecipe.class);
+        startActivity(myIntent);
+    }
+
+
+    public void AllRecipes(View view)
+    {
+        Intent myIntent = new Intent(MainActivity.this, AllRecipes.class);
+        startActivity(myIntent);
     }
 }

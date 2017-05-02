@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back1"
+    tools:context="assignment.jpriem.com.androidcookbook.MainActivity">
 
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="193dp"
+        android:layout_height="394dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:weightSum="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.347"
+        tools:layout_editor_absoluteY="-13dp">
+
+        <TextView
+            android:id="@+id/recipeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.04"
+            android:text="Recipe Name" />
+
+        <TextView
+            android:id="@+id/cookTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.04"
+            android:text="Cook Time:" />
+
+        <TextView
+            android:id="@+id/recipeDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.04"
+            android:text="Recipe Description" />
+
+        <ListView
+            android:id="@+id/recipeIngredientsList"
+            android:layout_width="match_parent"
+            android:layout_height="217dp" />
+
+        <TextView
+            android:id="@+id/recipeInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.04"
+            android:text="Recipe Instructions:" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

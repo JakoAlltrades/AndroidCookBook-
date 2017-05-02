@@ -18,6 +18,7 @@
         </activity>
         <activity android:name=".AllRecipes"></activity>
         <activity android:name=".CreateARecipe"></activity>
+        <activity android:name=".FullRecipe"></activity>
     </application>
 
 </manifest>

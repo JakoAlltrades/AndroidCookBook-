@@ -1,7 +1,5 @@
 package assignment.jpriem.com.androidcookbook;
 
-import android.util.Pair;
-
 import java.util.ArrayList;
 
 /**
@@ -11,7 +9,7 @@ import java.util.ArrayList;
 public class Recipe {
     private int id;
     private String name;
-    private ArrayList<Pair<Double, String>> ingredients;//amount and name of ingredient
+    private ArrayList<Ingredient> ingredients;//amount and name of ingredient
     private String description;
     private int cookTime;
     private String cookInstructions;
@@ -21,10 +19,10 @@ public class Recipe {
         this.name = name;
         this.description = description;
         this.cookTime = cookTime;
-        ingredients = new ArrayList<Pair<Double,String>>();
+        ingredients = new ArrayList<Ingredient>();
     }
 
-    public Recipe(String name, String description, int cookTime, ArrayList<Pair<Double,String>> ingredients,String cookInstructions)
+    public Recipe(String name, String description, int cookTime, ArrayList<Ingredient> ingredients,String cookInstructions)
     {
         this.name = name;
         this.description = description;
@@ -35,7 +33,7 @@ public class Recipe {
 
     public void AddIngredient(double amount, String ingredientName)
     {
-        Pair<Double, String> ingredient = new Pair<Double,String>(amount,ingredientName);
+        Ingredient ingredient = new Ingredient(ingredientName, amount);
         ingredients.add(ingredient);
     }
 
@@ -44,8 +42,8 @@ public class Recipe {
         boolean removed = false;
         for(int j = 0; j < ingredients.size() && !removed; j++)
         {
-            Pair<Double,String> ingredient = ingredients.get(j);
-            if(ingredient.second.equals(ingredientName))
+            Ingredient ingredient = ingredients.get(j);
+            if(ingredient.getIgrName().equals(ingredientName))
             {
                 ingredients.remove(ingredient);
                 removed = true;
@@ -84,7 +82,7 @@ public class Recipe {
         return cookTime;
     }
 
-    public ArrayList<Pair<Double,String>> getIngredients()
+    public ArrayList<Ingredient> getIngredients()
     {
         return ingredients;
     }

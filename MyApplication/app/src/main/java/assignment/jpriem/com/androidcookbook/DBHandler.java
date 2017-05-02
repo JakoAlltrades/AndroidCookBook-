@@ -82,7 +82,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 if (curRecipeTitle.equals(title)) {
                     int time = Integer.parseInt(cursor.getString(3));
                     //need to get the arraylist from the json objects
-                    JsonElement element = new JsonParser().parse(cursor.getString(6));
+                    JsonElement element = new JsonParser().parse(cursor.getString(4));
                     JsonObject object = element.getAsJsonObject();
                     recipe = new Recipe(cursor.getString(1), cursor.getString(2), time);
                 }

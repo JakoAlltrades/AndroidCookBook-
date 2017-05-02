@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         pie.AddIngredient(3.0, "Apples");
         //pie.RemoveInstruction(1);
         dBhandler.addRecipe(pie);
+        Recipe r = dBhandler.getRecipe("Pie");
     }
 
 

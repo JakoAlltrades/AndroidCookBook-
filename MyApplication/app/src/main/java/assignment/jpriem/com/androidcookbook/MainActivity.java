@@ -35,9 +35,12 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent myIntent = new Intent(MainActivity.this, CreateARecipe.class);
         startActivity(myIntent);
+        addRecipe();
     }
+    public void addRecipe()
+    {
 
-
+    }
     public void AllRecipes(View view)
     {
         Intent myIntent = new Intent(MainActivity.this, AllRecipes.class);

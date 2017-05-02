@@ -1,12 +1,9 @@
 package assignment.jpriem.com.androidcookbook;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Pair;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,15 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         dBhandler = new DBHandler(this);
         //dBhandler.onUpgrade(openOrCreateDatabase("recipeInfo", MODE_PRIVATE, null),1, 2);
-        Recipe pie = new Recipe("Pie", "A apple pie", 45);
-        ArrayList<Pair<Integer, String>> instructions = new ArrayList<Pair<Integer, String>>();
-        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-        //pie.AddInstruction(new Pair<Integer, String>(1, "Pre-heat the oven to 400 degrees"));
-        pie.AddIngredient(1.0, "Pie crust");
-        pie.AddIngredient(3.0, "Apples");
-        //pie.RemoveInstruction(1);
-        dBhandler.addRecipe(pie);
-        Recipe r = dBhandler.getRecipe("Pie");
+
     }
 
 

@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Pair<Double,String>> ingredients = new ArrayList<Pair<Double, String>>();
         //pie.AddInstruction(new Pair<Integer, String>(1, "Pre-heat the oven to 400 degrees"));
         pie.AddIngredient(1.0, "Pie crust");
-        pie.RemoveIngredient("Pie crust");
+        pie.AddIngredient(3.0, "Apples");
         //pie.RemoveInstruction(1);
-        //dBhandler.addRecipe(pie);
+        dBhandler.addRecipe(pie);
     }
 
 

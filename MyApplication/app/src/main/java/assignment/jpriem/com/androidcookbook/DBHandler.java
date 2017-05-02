@@ -119,8 +119,10 @@ public class DBHandler extends SQLiteOpenHelper {
             if(i != null)
             {
                 try {
-                    Ingredient ing = new Ingredient(i.getString("igrName"), i.getDouble("igrAmount"));
-                   ingredients.add(ing);
+
+
+                    Ingredient ing = new Ingredient(i.getString("igrName"), i.getDouble("igrAmount"), i.getString("igrMeasure"));
+                    ingredients.add(ing);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -7,13 +7,13 @@ package assignment.jpriem.com.androidcookbook;
 public class Ingredient {
     private String igrName;
     private double igrAmount;
-    private String igrmeasure;
+    private String igrMeasure;
 
     public Ingredient(String name, double amount, String measure)
     {
         igrName = name;
         igrAmount = amount;
-        igrmeasure = measure;
+        igrMeasure = measure;
     }
 
     public String getIgrName()
@@ -23,7 +23,7 @@ public class Ingredient {
 
     public String getIgrmeasure()
     {
-        return igrmeasure;
+        return igrMeasure;
     }
 
     public double getIgrAmount()

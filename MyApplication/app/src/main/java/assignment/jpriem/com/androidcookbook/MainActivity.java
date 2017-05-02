@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         //dBhandler.onUpgrade(openOrCreateDatabase("recipeInfo", MODE_PRIVATE, null),1, 2);
         Recipe pie = new Recipe("Pie", "A apple pie", 45);
         ArrayList<Pair<Integer, String>> instructions = new ArrayList<Pair<Integer, String>>();
-        ArrayList<Pair<Double,String>> ingredients = new ArrayList<Pair<Double, String>>();
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
         //pie.AddInstruction(new Pair<Integer, String>(1, "Pre-heat the oven to 400 degrees"));
         pie.AddIngredient(1.0, "Pie crust");
         pie.AddIngredient(3.0, "Apples");

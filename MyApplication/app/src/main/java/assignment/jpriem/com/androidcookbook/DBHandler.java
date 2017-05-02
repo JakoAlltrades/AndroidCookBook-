@@ -120,7 +120,7 @@ public class DBHandler extends SQLiteOpenHelper {
             {
                 try {
                     Ingredient ing = new Ingredient(i.getString("igrName"), i.getDouble("igrAmount"));
-                    ingredients.add(ing);
+                   ingredients.add(ing);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

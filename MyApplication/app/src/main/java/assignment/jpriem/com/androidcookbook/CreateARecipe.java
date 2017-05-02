@@ -33,10 +33,6 @@ public class CreateARecipe extends Activity{
         Recipe recipe = new Recipe(name.getText().toString(), desc.getText().toString(), intCookTime, ingredients,inst.getText().toString());
         db.addRecipe(recipe);
 
-<<<<<<< HEAD
-=======
-        //Recipe recipe = new Recipe();
->>>>>>> origin/master
     }
     public void sendHome(View view)
     {

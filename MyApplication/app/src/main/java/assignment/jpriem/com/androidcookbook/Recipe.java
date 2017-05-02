@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Recipe {
     private int id;
     private String name;
-    private ArrayList<Ingredient> ingredients;//amount and name of ingredient
+    private ArrayList<Ingredient> ingredients; //amount and name of ingredient
     private String description;
     private int cookTime;
     private String cookInstructions;

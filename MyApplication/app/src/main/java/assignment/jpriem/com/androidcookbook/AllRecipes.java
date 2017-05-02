@@ -29,6 +29,19 @@ public class AllRecipes extends Activity {
 
     public void addRecipeName()
     {
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        ingredients.add(new Ingredient("flour", 2));
+        ingredients.add(new Ingredient("Eggs", 3));
+        ingredients.add(new Ingredient("Sugar", 1.5));
+
+        Recipe r = new Recipe("Cake", "just a cake", 60, ingredients, "Mix ingredients and Bake");
+        Recipe r1 = new Recipe("Cookies", "just a cake", 60, ingredients, "Mix ingredients and Bake");
+        Recipe r2 = new Recipe("Bread", "just a cake", 60, ingredients, "Mix ingredients and Bake");
+        Recipe r3 = new Recipe("Brownies", "just a cake", 60, ingredients, "Mix ingredients and Bake");
+        recipes.add(r);
+        recipes.add(r1);
+        recipes.add(r2);
+        recipes.add(r3);
 //        recipeNames.add("Cake");
 //        recipeNames.add("Chocolate Cake");
 //        recipeNames.add("Chocolate Chip Cookies");

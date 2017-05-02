@@ -1,5 +1,7 @@
 package assignment.jpriem.com.androidcookbook;
 
+import java.util.AbstractMap;
+
 /**
  * Created by jprirm on 5/2/2017.
  */
@@ -44,5 +46,12 @@ public class Ingredient {
     public void setIgrmeasure(String value)
     {
         igrName = value;
+    }
+
+    @Override
+    public String toString()
+    {
+        String s = igrAmount + " " + igrMeasure + " " + igrName;
+        return s;
     }
 }

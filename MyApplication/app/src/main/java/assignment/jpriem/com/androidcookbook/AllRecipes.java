@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class AllRecipes extends Activity {
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private RecipeAdapter recipeAdapter;
-    private Recipe selectedRecipe;
+    public Recipe selectedRecipe;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,10 +32,11 @@ public class AllRecipes extends Activity {
 
     public void addRecipeName()
     {
+        DBHandler dbh = new DBHandler(this);
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-        ingredients.add(new Ingredient("flour", 2));
-        ingredients.add(new Ingredient("Eggs", 3));
-        ingredients.add(new Ingredient("Sugar", 1.5));
+        ingredients.add(new Ingredient("flour", 2, "cup"));
+        ingredients.add(new Ingredient("Eggs", 3, "cup"));
+        ingredients.add(new Ingredient("Sugar", 1.5, "cup"));
 
         Recipe r = new Recipe("Cake", "just a cake", 60, ingredients, "Mix ingredients and Bake");
         Recipe r1 = new Recipe("Cookies", "just a cake", 60, ingredients, "Mix ingredients and Bake");
@@ -45,6 +46,11 @@ public class AllRecipes extends Activity {
         recipes.add(r1);
         recipes.add(r2);
         recipes.add(r3);
+
+//        dbh.addRecipe(r);
+//        dbh.addRecipe(r1);
+//        dbh.addRecipe(r2);
+//        dbh.addRecipe(r3);
 
     }
 
@@ -60,8 +66,8 @@ public class AllRecipes extends Activity {
 
     public void fullRecipe()
     {
-        FullRecipe fr = new FullRecipe(recipes.get(1)); // need to fix this
         Intent myIntent = new Intent(AllRecipes.this, FullRecipe.class);
+        myIntent.putExtra("recipeName", selectedRecipe.getName());
         startActivity(myIntent);
     }
 

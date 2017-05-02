@@ -31,9 +31,9 @@ public class Recipe {
         this.cookInstructions = cookInstructions;
     }
 
-    public void AddIngredient(double amount, String ingredientName)
+    public void AddIngredient(double amount, String ingredientName,String measurment)
     {
-        Ingredient ingredient = new Ingredient(ingredientName, amount);
+        Ingredient ingredient = new Ingredient(ingredientName, amount,measurment);
         ingredients.add(ingredient);
     }
 

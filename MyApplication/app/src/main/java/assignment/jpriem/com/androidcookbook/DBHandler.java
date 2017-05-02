@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_COOK_TIME = "cook_time";
     private static final String KEY_INGREDIENTS = "ingredients";
-    private static final String KEY_INSTRUCTIONS = "cookInstructions";//Nvarchar(max)
+    private static final String KEY_INSTRUCTIONS = "cook_instructions";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,8 +40,12 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_RECIPES + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_DESCRIPTION + " TEXT,"+ KEY_COOK_TIME + " TEXT," + KEY_INGREDIENTS + " nvarchar(max)," + KEY_INSTRUCTIONS + " TEXT";
+                + KEY_ID + " INTEGER PRIMARY KEY,"
+                + KEY_NAME + " TEXT,"
+                + KEY_DESCRIPTION + " TEXT,"
+                + KEY_COOK_TIME + " TEXT,"
+                + KEY_INGREDIENTS + " TEXT,"
+                + KEY_INSTRUCTIONS + " TEXT)";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
     @Override
@@ -75,6 +82,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 if (curRecipeTitle.equals(title)) {
                     int time = Integer.parseInt(cursor.getString(3));
                     //need to get the arraylist from the json objects
+                    JsonElement element = new JsonParser().parse(cursor.getString(4));
+                    JsonObject object = element.getAsJsonObject();
                     recipe = new Recipe(cursor.getString(1), cursor.getString(2), time);
                 }
             } while (cursor.moveToNext() && recipe == null);
@@ -127,7 +136,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_COOK_TIME, recipe.getCookTime());
         values.put(KEY_DESCRIPTION, recipe.getDescription());
         //need to get the arraylist from the json objects
-
+        values.put(KEY_INGREDIENTS, new Gson().toJson(recipe.getIngredients()));
 // updating row
         return db.update(TABLE_RECIPES, values, KEY_NAME + " = ?",
                 new String[]{String.valueOf(recipe.getName())});

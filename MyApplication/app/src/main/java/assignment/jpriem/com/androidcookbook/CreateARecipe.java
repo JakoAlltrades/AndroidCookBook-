@@ -28,7 +28,7 @@ public class CreateARecipe extends Activity{
         //EditText addIng = (EditText)findViewById(R.id.AddIng);
         EditText cookTime = (EditText)findViewById(R.id.CookTime);
 
-        Recipe recipe = new Recipe();
+        //Recipe recipe = new Recipe();
     }
     public void sendHome(View view)
     {

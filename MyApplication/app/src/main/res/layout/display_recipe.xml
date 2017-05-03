@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.04"
+            android:paddingLeft="50dp"
             android:text="Recipe Name" />
 
         <TextView
@@ -36,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.04"
+            android:paddingLeft="50dp"
             android:text="Cook Time:" />
 
         <TextView
@@ -43,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.04"
+            android:paddingLeft="50dp"
             android:text="Recipe Description" />
 
         <LinearLayout
@@ -63,6 +66,7 @@
                 android:id="@+id/changePortionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
+                android:background="@drawable/buttonnbacks"
                 android:onClick="setPortionClick"
                 android:text="Portion"
                 android:textSize="12sp" />

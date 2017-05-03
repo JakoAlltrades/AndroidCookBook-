@@ -29,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
        -Make sure to clear all references to our activity.
        -Avoid static references to Activities, Views, and other android components.
 
+       #Battery saving tips
+       -put the phone into doze mode when the app is not in use.
+       -you can also use battery-historian to track the android battery status.
+
+      
+
      */
     DBHandler dBhandler;
     @Override

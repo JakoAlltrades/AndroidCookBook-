@@ -34,11 +34,13 @@ public class CreateARecipe extends Activity{
         Recipe recipe = new Recipe(name.getText().toString(), desc.getText().toString(), intCookTime, ingredients,inst.getText().toString());
         db.addRecipe(recipe);
     }
+
     public void sendHome(View view)
     {
         Intent myIntent = new Intent(CreateARecipe.this,MainActivity.class);
         startActivity(myIntent);
     }
+
     public void addIngredient(View view)
     {
         EditText amount = (EditText)findViewById(R.id.Amount);

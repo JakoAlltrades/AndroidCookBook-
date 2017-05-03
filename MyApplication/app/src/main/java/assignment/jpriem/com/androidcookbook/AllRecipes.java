@@ -16,12 +16,13 @@ public class AllRecipes extends Activity {
     private ArrayList<Recipe> recipes = new ArrayList<>();
     private RecipeAdapter recipeAdapter;
     public Recipe selectedRecipe;
-
+    DBHandler dbh;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the view from new_activity.xml
         setContentView(R.layout.all_recipes);
+        dbh = new DBHandler(this);
         addRecipeName();
         recipeAdapter = new RecipeAdapter(this, recipes);
         ListView recipesView = (ListView)findViewById(R.id.RecipesView);
@@ -30,7 +31,6 @@ public class AllRecipes extends Activity {
 
     public void addRecipeName()
     {
-        DBHandler dbh = new DBHandler(this);
         recipes = dbh.getAllRecipes();
 
 //        dbh.addRecipe(r);

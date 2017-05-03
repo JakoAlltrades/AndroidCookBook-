@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
     private int columnID = 1;
-    private int curId = 1;
+    private int curId = GetCurID();
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -56,6 +56,25 @@ public class DBHandler extends SQLiteOpenHelper {
 // Creating tables again
         onCreate(db);
     }
+
+    public int GetCurID()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        
+        String selectQuery = "SELECT * FROM " + TABLE_RECIPES;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+// looping through all rows and adding to list
+        int Id =0;
+        if (cursor.moveToFirst()) {
+            do {
+                Id = Integer.parseInt(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        Id = Id + 1;
+        return Id;
+    }
+
     // Adding new shop
     public void addRecipe(Recipe recipe) {
         SQLiteDatabase db = this.getWritableDatabase();

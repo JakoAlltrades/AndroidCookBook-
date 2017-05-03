@@ -62,12 +62,15 @@ public class FullRecipe extends Activity {
         EditText portionBox = (EditText)findViewById(R.id.portionBox);
         portionModifier = Integer.parseInt(portionBox.getText().toString());
         ingredientsAdapter.clear();
+        ArrayList<String> ingStrings = new ArrayList<>();
 
         for (int j = 0; j < ingredientsAdapter.getCount(); ++j)
         {
             Ingredient i = recipe.getIngredients().get(j);
-            ingredientsAdapter.add((i.getIgrAmount() * portionModifier) + " " + i.getIgrmeasure() + " " + i.getIgrName());
+
+            ingStrings.add((i.getIgrAmount() * portionModifier) + " " + i.getIgrmeasure() + " " + i.getIgrName());
         }
+        ingredientsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ingStrings);
     }
 
     private void SetUpIngredientsList()

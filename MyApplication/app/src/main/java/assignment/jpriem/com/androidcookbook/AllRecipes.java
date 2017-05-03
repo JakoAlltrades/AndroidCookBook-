@@ -23,13 +23,13 @@ public class AllRecipes extends Activity {
         // Get the view from new_activity.xml
         setContentView(R.layout.all_recipes);
         dbh = new DBHandler(this);
-        addRecipeName();
+        getRecipesFromDB();
         recipeAdapter = new RecipeAdapter(this, recipes);
         ListView recipesView = (ListView)findViewById(R.id.RecipesView);
         recipesView.setAdapter(recipeAdapter);
     }
 
-    public void addRecipeName()
+    public void getRecipesFromDB()
     {
         recipes = dbh.getAllRecipes();
 

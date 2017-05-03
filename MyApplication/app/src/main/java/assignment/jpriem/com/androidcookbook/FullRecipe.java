@@ -3,7 +3,9 @@ package assignment.jpriem.com.androidcookbook;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,15 +21,7 @@ public class FullRecipe extends Activity {
 
     private Recipe recipe;
     private ArrayAdapter<String> ingredientsAdapter;
-    public FullRecipe(Recipe recipe)
-    {
-        this.recipe = recipe;
-    }
-
-    public FullRecipe()
-    {
-
-    }
+    private double portionModifier = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,7 +32,6 @@ public class FullRecipe extends Activity {
         String recipeName = getIntent().getStringExtra("recipeName");
         recipe = dbh.getRecipe(recipeName);
         displayRecipe();
-
     }
 
     private void displayRecipe()
@@ -64,14 +57,28 @@ public class FullRecipe extends Activity {
         }
     }
 
+    public void setPortionClick(View view)
+    {
+        EditText portionBox = (EditText)findViewById(R.id.portionBox);
+        portionModifier = Integer.parseInt(portionBox.getText().toString());
+        ingredientsAdapter.clear();
+
+        for (int j = 0; j < ingredientsAdapter.getCount(); ++j)
+        {
+            Ingredient i = recipe.getIngredients().get(j);
+            ingredientsAdapter.add((i.getIgrAmount() * portionModifier) + " " + i.getIgrmeasure() + " " + i.getIgrName());
+        }
+    }
+
     private void SetUpIngredientsList()
     {
         ArrayList<Ingredient> ings = recipe.getIngredients();
         ArrayList<String> ingStrings = new ArrayList<>();
         for(int j = 0; j < ings.size(); ++j)
         {
-            ingStrings.add(ings.get(j).toString());
+            Ingredient i = ings.get(j);
+            ingStrings.add((i.getIgrAmount() * portionModifier) + " " + i.getIgrmeasure() + " " + i.getIgrName());
         }
-        ingredientsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ingStrings);
+        ingredientsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ingStrings);
     }
 }

@@ -9,30 +9,33 @@ import android.widget.ListView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Matthew Balderas on 5/1/2017.
  */
 
 public class AllRecipes extends Activity {
-    private ArrayList<Recipe> recipes = new ArrayList<>();
+    private List<Recipe> recipes;
     private RecipeAdapter recipeAdapter;
     public Recipe selectedRecipe;
+    DBHandler dbh;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the view from new_activity.xml
         setContentView(R.layout.all_recipes);
-        addRecipeName();
-        recipeAdapter = new RecipeAdapter(this, recipes);
+        dbh = new DBHandler(this);
+        getRecipesFromDB();
+//        recipeAdapter = new RecipeAdapter(this, recipes);
         ListView recipesView = (ListView)findViewById(R.id.RecipesView);
         recipesView.setAdapter(recipeAdapter);
     }
 
     public void addRecipeName()
     {
-        DBHandler dbh = new DBHandler(this);
+
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
         ingredients.add(new Ingredient("flour", 2, "cup"));
         ingredients.add(new Ingredient("Eggs", 3, "cup"));
@@ -52,6 +55,11 @@ public class AllRecipes extends Activity {
 //        dbh.addRecipe(r2);
 //        dbh.addRecipe(r3);
 
+    }
+
+    public void getRecipesFromDB()
+    {
+        recipes = dbh.getAllRecipes();
     }
 
     public void onRecipeClick(View view)

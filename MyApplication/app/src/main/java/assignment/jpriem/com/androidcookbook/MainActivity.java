@@ -7,6 +7,8 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Matthew Balderas, John Priem, Brandon Coats, and Chance Hollis
+
 
     /*
 

@@ -11,6 +11,7 @@
         android:layout_weight="0.03"
         android:onClick="onRecipeClick"
         android:text="TextView"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
@@ -19,5 +20,5 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
         android:text="TextView"
-        android:textSize="10sp" />
+        android:textSize="14sp" />
 </LinearLayout>

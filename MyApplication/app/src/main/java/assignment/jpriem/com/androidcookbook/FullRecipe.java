@@ -41,7 +41,7 @@ public class FullRecipe extends Activity {
             TextView nameV = (TextView)findViewById(R.id.recipeName);
             nameV.setText(recipe.getName());
             TextView cookTime = (TextView)findViewById(R.id.cookTime);
-            cookTime.setText("CookTime: " + recipe.getCookTime() + "");
+            cookTime.setText(recipe.getCookTime() + "");
             TextView descV = (TextView)findViewById(R.id.recipeDesc);
             descV.setText(recipe.getDescription());
             TextView instructions = (TextView)findViewById(R.id.recipeInstructions);
@@ -62,16 +62,7 @@ public class FullRecipe extends Activity {
         EditText portionBox = (EditText)findViewById(R.id.portionBox);
         portionModifier = Integer.parseInt(portionBox.getText().toString());
         ingredientsAdapter.clear();
-        ArrayList<String> ingStrings = new ArrayList<>();
-
-        for (int j = 0; j < recipe.getIngredients().size(); ++j)
-        {
-            Ingredient i = recipe.getIngredients().get(j);
-
-            ingStrings.add((i.getIgrAmount() * portionModifier) + " " + i.getIgrmeasure() + " " + i.getIgrName());
-        }
-        ingredientsAdapter.addAll(ingStrings);
-//        ingredientsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ingStrings);
+        displayRecipe();
     }
 
     private void SetUpIngredientsList()

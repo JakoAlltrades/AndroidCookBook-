@@ -7,6 +7,29 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    /*
+
+    #images Loading Optimizations
+     -Scale Down image to fit container size,
+     -Cache the image in memory.
+
+     Optimizations: two options for images,
+      -Implement everything ourselves,
+      -Image loading managment library.
+      -Universal Image Loader, Picasso, Fresco.
+
+
+      #memoryleaks:
+       -A static reference to your view,
+       -A static instance of a class.
+       -References live longer than out activity.
+
+       #fix memory leaks
+       -Make sure to clear all references to our activity.
+       -Avoid static references to Activities, Views, and other android components.
+
+     */
     DBHandler dBhandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

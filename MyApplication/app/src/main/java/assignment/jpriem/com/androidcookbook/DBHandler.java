@@ -13,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by jprirm on 4/30/2017.
@@ -21,6 +20,7 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
     private int columnID = 1;
+    private int curId = GetCurID();
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -51,17 +51,38 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-// Drop older table if existed
+        // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES);
-// Creating tables again
+        // Creating tables again
         onCreate(db);
     }
+
+    public int GetCurID()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selectQuery = "SELECT * FROM " + TABLE_RECIPES;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        // looping through all rows and adding to list
+        int Id =0;
+        if (cursor.moveToFirst()) {
+            do {
+                Id = Integer.parseInt(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        Id = Id + 1;
+        return Id;
+    }
+
     // Adding new shop
     public void addRecipe(Recipe recipe) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         JSONArray jsonArray = null;
         ContentValues values = new ContentValues();
+        values.put(KEY_ID, curId);
+        curId++;
         values.put(KEY_NAME, recipe.getName());
         values.put(KEY_DESCRIPTION, recipe.getDescription());
         values.put(KEY_COOK_TIME, recipe.getCookTime());
@@ -74,7 +95,7 @@ public class DBHandler extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         values.put(KEY_INGREDIENTS, jsonArray.toString());
-// Inserting Row
+        // Inserting Row
         db.insert(TABLE_RECIPES, null, values);
         db.close(); // Closing database connection
     }
@@ -91,7 +112,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 if (curRecipeTitle.equals(title)) {
                     int time = Integer.parseInt(cursor.getString(3));
                     //need to get the arraylist from the json objects
-                    String listCol = cursor.getColumnName(5);
+
                     try {
                         JSONArray objects = new JSONArray(cursor.getString(4));
                         ingredients = JSONArrayToIngredientList(objects);
@@ -132,28 +153,34 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // Getting All Shops
-    public List<Recipe> getAllRecipes() {
-        List<Recipe> shopList = new ArrayList<Recipe>();
-// Select All Query
+    public ArrayList<Recipe> getAllRecipes() {
+        ArrayList<Recipe> shopList = new ArrayList<Recipe>();
+        // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_RECIPES;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
-// looping through all rows and adding to list
+        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 int time = Integer.parseInt(cursor.getString(3));
                 //need to get the arraylist from the json objects
 
-                Recipe recipe = new Recipe(cursor.getString(1), cursor.getString(2), time);
+                try {
+                    JSONArray objects = new JSONArray(cursor.getString(4));
+                    ingredients = JSONArrayToIngredientList(objects);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Recipe recipe = new Recipe(cursor.getString(1), cursor.getString(2), time, ingredients, cursor.getString(5));
                 recipe.setId(Integer.parseInt(cursor.getString(0)));
-// Adding contact to list
+                // Adding contact to list
                 shopList.add(recipe);
             } while (cursor.moveToNext());
         }
 
-// return contact list
+        // return contact list
         return shopList;
     }
     // Getting shops Count
@@ -165,9 +192,10 @@ public class DBHandler extends SQLiteOpenHelper {
         count  = cursor.getCount();
         cursor.close();
 
-// return count
+        // return count
         return count;
     }
+
     // Updating a shop
     public int updateRecipe(Recipe recipe) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -184,16 +212,16 @@ public class DBHandler extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         values.put(KEY_INGREDIENTS, jsonArray.toString());
-// Inserting Row
-// updating row
-        return db.update(TABLE_RECIPES, values, KEY_NAME + " = ?",
+        // Inserting Row
+        // updating row
+        return db.update(TABLE_RECIPES, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(recipe.getName())});
     }
 
     // Deleting a recipe
     public void deleteRecipe(Recipe recipe) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_RECIPES, KEY_NAME + " = ?",
+        db.delete(TABLE_RECIPES, KEY_ID + " = ?",
                 new String[] { String.valueOf(recipe.getName()) });
         db.close();
     }

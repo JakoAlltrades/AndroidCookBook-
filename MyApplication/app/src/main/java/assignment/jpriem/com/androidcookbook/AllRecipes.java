@@ -4,62 +4,40 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Matthew Balderas on 5/1/2017.
  */
 
 public class AllRecipes extends Activity {
-    private List<Recipe> recipes;
+    private ArrayList<Recipe> recipes = new ArrayList<>();
     private RecipeAdapter recipeAdapter;
     public Recipe selectedRecipe;
     DBHandler dbh;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the view from new_activity.xml
         setContentView(R.layout.all_recipes);
         dbh = new DBHandler(this);
-        getRecipesFromDB();
-//        recipeAdapter = new RecipeAdapter(this, recipes);
+        addRecipeName();
+        recipeAdapter = new RecipeAdapter(this, recipes);
         ListView recipesView = (ListView)findViewById(R.id.RecipesView);
         recipesView.setAdapter(recipeAdapter);
     }
 
     public void addRecipeName()
     {
-
-        ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-        ingredients.add(new Ingredient("flour", 2, "cup"));
-        ingredients.add(new Ingredient("Eggs", 3, "cup"));
-        ingredients.add(new Ingredient("Sugar", 1.5, "cup"));
-
-        Recipe r = new Recipe("Cake", "just a cake", 60, ingredients, "Mix ingredients and Bake");
-        Recipe r1 = new Recipe("Cookies", "just a cake", 60, ingredients, "Mix ingredients and Bake");
-        Recipe r2 = new Recipe("Bread", "just a cake", 60, ingredients, "Mix ingredients and Bake");
-        Recipe r3 = new Recipe("Brownies", "just a cake", 60, ingredients, "Mix ingredients and Bake");
-        recipes.add(r);
-        recipes.add(r1);
-        recipes.add(r2);
-        recipes.add(r3);
+        recipes = dbh.getAllRecipes();
 
 //        dbh.addRecipe(r);
 //        dbh.addRecipe(r1);
 //        dbh.addRecipe(r2);
 //        dbh.addRecipe(r3);
 
-    }
-
-    public void getRecipesFromDB()
-    {
-        recipes = dbh.getAllRecipes();
     }
 
     public void onRecipeClick(View view)

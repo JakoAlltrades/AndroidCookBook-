@@ -51,20 +51,20 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-// Drop older table if existed
+        // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPES);
-// Creating tables again
+        // Creating tables again
         onCreate(db);
     }
 
     public int GetCurID()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        
+
         String selectQuery = "SELECT * FROM " + TABLE_RECIPES;
         Cursor cursor = db.rawQuery(selectQuery, null);
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-// looping through all rows and adding to list
+        // looping through all rows and adding to list
         int Id =0;
         if (cursor.moveToFirst()) {
             do {
@@ -95,7 +95,7 @@ public class DBHandler extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         values.put(KEY_INGREDIENTS, jsonArray.toString());
-// Inserting Row
+        // Inserting Row
         db.insert(TABLE_RECIPES, null, values);
         db.close(); // Closing database connection
     }
@@ -155,13 +155,13 @@ public class DBHandler extends SQLiteOpenHelper {
     // Getting All Shops
     public ArrayList<Recipe> getAllRecipes() {
         ArrayList<Recipe> shopList = new ArrayList<Recipe>();
-// Select All Query
+        // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_RECIPES;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-// looping through all rows and adding to list
+        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 int time = Integer.parseInt(cursor.getString(3));
@@ -175,12 +175,12 @@ public class DBHandler extends SQLiteOpenHelper {
                 }
                 Recipe recipe = new Recipe(cursor.getString(1), cursor.getString(2), time, ingredients, cursor.getString(5));
                 recipe.setId(Integer.parseInt(cursor.getString(0)));
-// Adding contact to list
+                // Adding contact to list
                 shopList.add(recipe);
             } while (cursor.moveToNext());
         }
 
-// return contact list
+        // return contact list
         return shopList;
     }
     // Getting shops Count
@@ -192,9 +192,10 @@ public class DBHandler extends SQLiteOpenHelper {
         count  = cursor.getCount();
         cursor.close();
 
-// return count
+        // return count
         return count;
     }
+
     // Updating a shop
     public int updateRecipe(Recipe recipe) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -211,16 +212,16 @@ public class DBHandler extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         values.put(KEY_INGREDIENTS, jsonArray.toString());
-// Inserting Row
-// updating row
-        return db.update(TABLE_RECIPES, values, KEY_NAME + " = ?",
+        // Inserting Row
+        // updating row
+        return db.update(TABLE_RECIPES, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(recipe.getName())});
     }
 
     // Deleting a recipe
     public void deleteRecipe(Recipe recipe) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_RECIPES, KEY_NAME + " = ?",
+        db.delete(TABLE_RECIPES, KEY_ID + " = ?",
                 new String[] { String.valueOf(recipe.getName()) });
         db.close();
     }
